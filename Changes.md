@@ -14,3 +14,14 @@ Was missing brackets so the function was never called and the program did nothin
 Changed to 
 
 run_system_monolith()
+
+
+
+Bug 3:
+
+Infinte loop
+loading = 0
+    while loading < 5:
+        print("Loading module " + str(loading))
+
+"loading" never increases in the while loop so its going to run forever.
