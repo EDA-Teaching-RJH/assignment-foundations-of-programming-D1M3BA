@@ -45,12 +45,26 @@ def run_system_monolith():
             
         elif opt == "3":
             rem = input("Name to remove: ")
+
+            found = False 
+            idx = 0
+
+
+            for i in range(len(n)):
+                if n[i] == rem:
+                    found = True 
+                    idx = i
+
+            
+            if found == True:
            
-            idx = n.index(rem)
-            n.pop(idx)
-            r.pop(idx)
-            d.pop(idx)
-            print("Removed.")
+                idx = n.index(rem)
+                n.pop(idx)
+                r.pop(idx)
+                d.pop(idx)
+                print("Removed.")
+            else:
+                print("Error: Crew member not found")
             
         elif opt == "4":
             print("Analyzing...")
