@@ -141,3 +141,17 @@ if rank == "Captain" or rank == "Commander":
 
 
 
+Bug 9:
+
+x = 10
+        if x > 5:
+            print("System Check OK")
+        else:
+            print("System Failure")
+            
+
+x is hardcoded to be 10 so these lines of code are redudant.Unsure of the inteded implementation so i will just remove it for now. 
+
+
+
+
