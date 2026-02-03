@@ -58,7 +58,7 @@ def run_system_monolith():
             
             if found == True:
            
-                idx = n.index(rem)
+                
                 n.pop(idx)
                 r.pop(idx)
                 d.pop(idx)
