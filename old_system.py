@@ -83,16 +83,12 @@ def run_system_monolith():
             print("Invalid.")
             
         
-       """ x = 10
-        if x > 5:
-            print("System Check OK")
-        else:
-            print("System Failure") 
-            
-            
-            Needs to be updated. When inteded implementation is clear"""
-    
-        
+       # x = 10
+        #if x > 5:
+            #print("System Check OK")
+       # else:
+         #   print("System Failure")
+         # Needs to be updated when intedned implementation is clear.
             
        
         if len(n) > 0:
@@ -101,14 +97,14 @@ def run_system_monolith():
             print("Database empty.")
 
         
-       """ fuel = 100
-        consumption = 0
-        while fuel > 0:
+        #fuel = 100
+        #consumption = 0
+        #while fuel > 0:
             
-            print("Idling...")
-            break  
-        
-        Needs fixing, when inteded implementation clear"""
+            #print("Idling...")
+           #break 
+
+        # Needs to be updated when intedned implementation is clear.
             
         print("End of cycle.")
 
