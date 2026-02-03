@@ -90,7 +90,7 @@ def run_system_monolith():
             print("System Failure") 
             
             
-            Needs to be updated """
+            Needs to be updated. When inteded implementation is clear"""
     
         
             
@@ -101,12 +101,14 @@ def run_system_monolith():
             print("Database empty.")
 
         
-        fuel = 100
+       """ fuel = 100
         consumption = 0
         while fuel > 0:
             
             print("Idling...")
-            break 
+            break  
+        
+        Needs fixing, when inteded implementation clear"""
             
         print("End of cycle.")
 

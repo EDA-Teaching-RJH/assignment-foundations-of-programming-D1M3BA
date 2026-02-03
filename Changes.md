@@ -150,8 +150,20 @@ x = 10
             print("System Failure")
             
 
-x is hardcoded to be 10 so these lines of code are redudant.Unsure of the inteded implementation so i will just remove it for now. 
+x is hardcoded to be 10 so these lines of code are redudant as x will always be greater than 5.Unsure of the inteded implementation so i will just remove it for now. 
 
 
 
+Bug 10:
+
+
+ fuel = 100
+        consumption = 0
+        while fuel > 0:
+            
+            print("Idling...")
+            break 
+
+
+simmilar to bug 9 where this dosent really do anything. We have a while loop that is broken out of immeadiatley. fuel is redundant and consumption is also redudnat. So just removing for now
 
