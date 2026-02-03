@@ -25,3 +25,37 @@ loading = 0
         print("Loading module " + str(loading))
 
 "loading" never increases in the while loop so its going to run forever.
+
+
+loading = 0
+    while loading < 5:
+        print("Loading module " + str(loading))
+        loading += 1
+
+
+
+
+
+Bug 4:
+
+
+Bug 4:
+
+if opt == "1":  
+            print("Current Crew List:")
+            
+            for i in range(10):
+                print(n[i] + " - " + r[i]) 
+
+
+        The loop was trying to acess indexes that dont exist. Initally n and r only have 4 items.
+
+
+changed to 
+
+    if opt == "1":  
+            print("Current Crew List:")
+            
+            for i in range(len(n)):
+                print(n[i] + " - " + r[i]) 
+
