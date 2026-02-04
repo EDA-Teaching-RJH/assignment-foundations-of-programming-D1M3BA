@@ -4,17 +4,49 @@ import time
 
 def main():
     print("BOOTING SYSTEM...")
-    print("...")
+    time.sleep(0.5)
     
-
+    
     names, ranks, divisions, ids = init_database()
-    opt = int(display_menu())
-    if opt == 1:
-        display_roster(names, ranks, divisions, ids)
-    elif opt == 2:
-        add_member(names, ranks, divisions, ids)
-    elif opt == 3:
-        remove_member(names, ranks, divisions, ids)
+    print("Initilising databse")
+    time.sleep(0.5)
+    print("Sucessful")
+    time.sleep(0.5)
+
+    full_name = input("Enter your full name: ").strip().title()
+    print(f"Logging in: {full_name} ")
+    time.sleep(0.5)
+    
+    print(f"Student: {full_name} is now logged in")
+    time.sleep(0.5)
+    print("WELCOME TO FLEET COMMAND")
+
+    while True:
+        opt = int(display_menu())
+        if opt == 1:
+            display_roster(names, ranks, divisions, ids)
+        elif opt == 2:
+            add_member(names, ranks, divisions, ids)
+        elif opt == 3:
+            remove_member(names, ranks, divisions, ids)
+        elif opt == 4:
+            update_rank(names,ranks, divisions, ids)
+        elif opt == 5:
+            
+
+        elif opt == 6:
+
+        elif opt == 7:
+
+        elif opt == 8:
+        
+
+        elif opt == 9:
+            print(f"Logging out User: {full_name}")
+            time.sleep(0.5)
+            print("Shutting down")
+
+            
     
         
 
@@ -32,20 +64,23 @@ def init_database():
 
 def display_menu():
 
-    full_name = input("Enter your full name: ").strip().title()
+    
 
     
 
-    print(f"Logging in: {full_name} ")
-    print("...")
-    print(f"Student: {full_name} is now logged in")
-    print("WELCOME TO FLEET COMMAND")
+   
+    
     print("\n--- MENU ---")
     print("1. View Crew")
     print("2. Add Crew")
     print("3. Remove Crew")
-    print("4. Analyze Data")
-    print("5. Exit")
+    print("4. Update rank")
+    print("5. Find crew")
+    print("6. Filter by division")
+    print("7. Calculate payroll")
+    print("8. Count officers")
+
+    print("9. Exit")
     opt = input("Select option: ")
     
     return opt
@@ -53,25 +88,21 @@ def display_menu():
 
 
 def add_member(names, ranks, divisions, ids):
-    valid_ranks = ["Crewman", "Ensign" , "Jr Lieutenant", "Lieutenant", "Lieutenant Commander", "Commander", "Captain", "Rear Admiral", "Vice Admiral", "Admiral"]
+    
             
     new_name = input("Name: ").strip().title()
 
     while True:
         new_rank = input("Rank: ").strip().title()
 
-        found = False
-        for i in range(len(valid_ranks)):
-            if new_rank == valid_ranks[i]:
-                found = True
-        
+        found = valid_rank(new_rank)
         if found == True: 
             break
-        else:
-            print("Rank cannot be found. Please use a valid TNG rank listed below")
-            print_list(valid_ranks)
-        
-    new_div = input("Division: ").strip().title()
+    while True:
+        new_div = input("Division: ").strip().title()
+        found = valid_division(new_div)
+        if found == True:
+            break
 
     while True:
         new_id = input("ID: ").strip()
@@ -98,7 +129,7 @@ def add_member(names, ranks, divisions, ids):
 
 
 
-# prints list on a single line with no extra formatting 
+
 def print_list(list):
 
  
@@ -135,25 +166,46 @@ def display_roster (names, ranks, divisions, ids):
 
 def remove_member(names, ranks, divisions, ids):
     
-    id_to_find = input("Enter the ID of the member you want to remove: ")
+   
 
-    found = False 
-    idx = -1
-    for i in range(len(ids)):
-        if id_to_find == ids[i]:
-            found = True
-            idx = i
-    if found == True:
+    print("What crew member would you like to remove")
+    idx = get_id(names, ranks, divisions, ids)
+   
         
-        print(f"Removing {ids[idx]} | {names[idx]} | {ranks[idx]} | {divisions[idx]}")
+    print(f"Removing {ids[idx]} | {names[idx]} | {ranks[idx]} | {divisions[idx]}")
         
-        ids.pop(idx)
-        names.pop(idx)
-        divisions.pop(idx)
-        ranks.pop(idx)
-        print("Crew Member has been removed")
-    else:
-        print(f"Id not found")
+    ids.pop(idx)
+    names.pop(idx)
+    divisions.pop(idx)
+    ranks.pop(idx)
+    print("Crew Member has been removed")
+    
+
+
+def update_rank(names, ranks, divisions,ids): 
+    
+    print("Whos rank do you wish to change")
+    idx = get_id(names, ranks, divisions, ids)
+
+    print(f"{names[idx]} is currently a {ranks[idx]}")
+
+    while True: 
+        new_rank = input(f"Enter {names[idx]} new rank:  ")
+
+        
+        
+        if valid_rank(new_rank) == True:
+            ranks[idx] = new_rank
+            print(f"Succesful.")
+            print(f"{names[idx]} is now a {ranks[idx]} ")
+            break
+        
+    
+   
+
+
+
+
         
     
 
@@ -172,3 +224,45 @@ main()
 
 
 
+
+def valid_rank(rank):
+    valid_ranks = ["Crewman", "Ensign" , "Jr Lieutenant", "Lieutenant", "Lieutenant Commander", "Commander", "Captain", "Rear Admiral", "Vice Admiral", "Admiral"]
+    for i in range(len(valid_ranks)):
+            if rank == valid_ranks[i]:
+                return True
+            
+    print("Invalid TNG Rank. Please try one below")
+    print_list(valid_ranks)
+    return False
+
+    
+        
+
+
+def valid_division(division):
+    valid_divs = ["Command", "Operations", "Sciences", "Civilian", "Other"]
+    for i in range(len(valid_divs)):
+        if division == valid_divs[i]:
+            return True
+    
+    print("Invalid TNG Division. Please try one below")
+    print_list(valid_divs)
+    return False
+
+
+
+
+def get_id(names, ranks, divisions, ids):
+    while True:
+        id_to_find = input("Enter Id: ").strip()
+        found = False
+        for i in range(len(ids)):
+            if ids[i] == id_to_find:
+                return i
+        print(f"Error: ID '{id_to_find}' not found.")
+
+
+        choice = input("Type list to view roster or Enter to try again")
+        if choice == 'list':
+            display_roster(names, ranks, divisions, ids)
+    
