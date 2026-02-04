@@ -31,14 +31,14 @@ def main():
             remove_member(names, ranks, divisions, ids)
         elif opt == 4:
             update_rank(names,ranks, divisions, ids)
-        elif opt == 5:
+       ## elif opt == 5:
             
 
-        elif opt == 6:
+       ## elif opt == 6:
 
-        elif opt == 7:
+       ## elif opt == 7:
 
-        elif opt == 8:
+       ## elif opt == 8:
         
 
         elif opt == 9:
