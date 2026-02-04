@@ -10,6 +10,8 @@ def main():
     names, ranks, divisions, ids = init_database()
     opt = int(display_menu())
     if opt == 1:
+        display_roster(names, ranks, divisions, ids)
+    elif opt == 2:
         add_member(names, ranks, divisions, ids)
     
         
@@ -111,11 +113,35 @@ def print_list(list):
     
             
            
-   
+def display_roster (names, ranks, divisions, ids):
+
+
+    print("ID                    |Name                   |Rank                   |Division             ")
+    print("--------------------------------------------------------------------------------------------")
+
+    for i in range(len(names)):
+        name = column_align(names[i])
+        rank = column_align(ranks[i])
+        division = divisions[i]
+        id = column_align(ids[i])
+
+        print(f"{id}| {name}| {rank}| {division}")
 
 
 
 
+
+
+
+
+def column_align(word):
+    column_length = 22
+    spaces = column_length - len(word)
+    if spaces < 0:
+        return word
+    for i in range(spaces):
+        word += " "
+    return word
 
 main()
 
