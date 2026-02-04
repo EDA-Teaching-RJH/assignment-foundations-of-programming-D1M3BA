@@ -13,6 +13,8 @@ def main():
         display_roster(names, ranks, divisions, ids)
     elif opt == 2:
         add_member(names, ranks, divisions, ids)
+    elif opt == 3:
+        remove_member(names, ranks, divisions, ids)
     
         
 
@@ -25,7 +27,7 @@ def init_database():
     divisions = ["Science" , "Operations" , "Other" , "Science" , "Operations" ]
     ids = ["1001" , "1002" , "1003" , "1004" , "1005"]
 
-    return names, ranks, divisions, ids, 
+    return names, ranks, divisions, ids
 
 
 def display_menu():
@@ -131,6 +133,29 @@ def display_roster (names, ranks, divisions, ids):
 
 
 
+def remove_member(names, ranks, divisions, ids):
+    
+    id_to_find = input("Enter the ID of the member you want to remove: ")
+
+    found = False 
+    idx = -1
+    for i in range(len(ids)):
+        if id_to_find == ids[i]:
+            found = True
+            idx = i
+    if found == True:
+        
+        print(f"Removing {ids[idx]} | {names[idx]} | {ranks[idx]} | {divisions[idx]}")
+        
+        ids.pop(idx)
+        names.pop(idx)
+        divisions.pop(idx)
+        ranks.pop(idx)
+        print("Crew Member has been removed")
+    else:
+        print(f"Id not found")
+        
+    
 
 
 
