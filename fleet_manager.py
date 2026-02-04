@@ -197,6 +197,7 @@ def update_rank(names, ranks, divisions,ids):
         if valid_rank(new_rank) == True:
             ranks[idx] = new_rank
             print(f"Succesful.")
+            time.sleep(0.5)
             print(f"{names[idx]} is now a {ranks[idx]} ")
             break
         
@@ -220,7 +221,7 @@ def column_align(word):
         word += " "
     return word
 
-main()
+
 
 
 
@@ -262,7 +263,11 @@ def get_id(names, ranks, divisions, ids):
         print(f"Error: ID '{id_to_find}' not found.")
 
 
-        choice = input("Type list to view roster or Enter to try again")
+        choice = input("Type list to view roster or Enter to try again: ")
         if choice == 'list':
             display_roster(names, ranks, divisions, ids)
     
+
+
+
+main()
