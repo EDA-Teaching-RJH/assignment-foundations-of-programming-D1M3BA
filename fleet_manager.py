@@ -22,7 +22,7 @@ def main():
     print("WELCOME TO FLEET COMMAND")
 
     while True:
-        opt = int(display_menu())
+        opt = display_menu()
         if opt == "1":
             display_roster(names, ranks, divisions, ids)
         elif opt == "2":
@@ -35,10 +35,11 @@ def main():
             search_crew(names, ranks, divisions, ids)
             
 
-        elif opt == 6:
+        elif opt == "6":
             filter_by_division(names, ranks, divisions, ids)
 
-       ## elif opt == 7:
+        elif opt == "7":
+            calculate_payroll (ranks)
 
        ## elif opt == 8:
         
@@ -61,7 +62,7 @@ def main():
 def init_database():
     names = ["Picard" , "Riker" , "Data" , "Forge" , "Crusher"]
     ranks = ["Captain" , "Commander", "Lieutenant Commander" , "Lieutenant Commander" , "Commander"]
-    divisions = ["Science" , "Operations" , "Other" , "Sciencesa" , "Operations" ]
+    divisions = ["Science" , "Operations" , "Other" , "Science" , "Operations" ]
     ids = ["1001" , "1002" , "1003" , "1004" , "1005"]
 
     return names, ranks, divisions, ids
@@ -246,7 +247,7 @@ def valid_rank(rank):
 
 
 def valid_division(division):
-    valid_divs = ["Command", "Operations", "Sciences", "Civilian", "Other"]
+    valid_divs = ["Command", "Operations", "Science", "Civilian", "Other"]
     for i in range(len(valid_divs)):
         if division == valid_divs[i]:
             return i
@@ -301,7 +302,7 @@ def filter_by_division(names, ranks, divisions, ids):
                 
 
 def print_by_division(div, names, ranks, divisions, ids):
-    valid_divs = ["Command", "Operations", "Sciences", "Civilian", "Other"]
+    valid_divs = ["Command", "Operations", "Science", "Civilian", "Other"]
     print(f"-----Members of {valid_divs[div]}-----")
     found = False
     for i in range(len(divisions)):
@@ -310,6 +311,44 @@ def print_by_division(div, names, ranks, divisions, ids):
             found = True
     if found == False:
         print("No members found")
+
+
+
+def calculate_payroll (ranks):
+    total_budget = 0
+    for i in range(len(ranks)):
+        rank = ranks[i]
+        if rank == "Admiral":
+            total_budget += 10000
+        elif rank == "Vice Admiral":
+            total_budget += 5000
+        elif rank == "Rear Admiral":
+            total_budget += 2000
+        elif rank == "Captain":
+            total_budget += 1000
+        elif rank == "Commander":
+            total_budget += 800
+        elif rank == "Lieutenant Commander":
+            total_budget += 700
+        elif rank == "Lieutenant":
+            total_budget += 600
+        elif rank == "Ensign":
+            total_budget += 500
+        elif rank == "Civilian":
+            continue
+        else:
+            total_budget += 200 
+    print(f"Total monthly payroll: {total_budget} Credits")
+
+
+
+
+
+
+   
+        
+
+
 
 
 
