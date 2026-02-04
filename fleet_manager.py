@@ -23,19 +23,20 @@ def main():
 
     while True:
         opt = int(display_menu())
-        if opt == 1:
+        if opt == "1":
             display_roster(names, ranks, divisions, ids)
-        elif opt == 2:
+        elif opt == "2":
             add_member(names, ranks, divisions, ids)
-        elif opt == 3:
+        elif opt == "3":
             remove_member(names, ranks, divisions, ids)
-        elif opt == 4:
+        elif opt == "4":
             update_rank(names,ranks, divisions, ids)
-        elif opt == 5:
+        elif opt == "5":
             search_crew(names, ranks, divisions, ids)
             
 
-       ## elif opt == 6:
+        elif opt == 6:
+            filter_by_division(names, ranks, divisions, ids)
 
        ## elif opt == 7:
 
@@ -46,6 +47,9 @@ def main():
             print(f"Logging out User: {full_name}")
             time.sleep(0.5)
             print("Shutting down")
+        
+        else:
+            print("Invalid result. Enter the number next to the associated action")
 
             
     
@@ -57,7 +61,7 @@ def main():
 def init_database():
     names = ["Picard" , "Riker" , "Data" , "Forge" , "Crusher"]
     ranks = ["Captain" , "Commander", "Lieutenant Commander" , "Lieutenant Commander" , "Commander"]
-    divisions = ["Science" , "Operations" , "Other" , "Science" , "Operations" ]
+    divisions = ["Science" , "Operations" , "Other" , "Sciencesa" , "Operations" ]
     ids = ["1001" , "1002" , "1003" , "1004" , "1005"]
 
     return names, ranks, divisions, ids
@@ -82,7 +86,7 @@ def display_menu():
     print("8. Count officers")
 
     print("9. Exit")
-    opt = input("Select option: ")
+    opt = input("Select option: ").strip()
     
     return opt
 
@@ -102,7 +106,7 @@ def add_member(names, ranks, divisions, ids):
     while True:
         new_div = input("Division: ").strip().title()
         found = valid_division(new_div)
-        if found == True:
+        if found != -1:
             break
 
     while True:
@@ -245,11 +249,11 @@ def valid_division(division):
     valid_divs = ["Command", "Operations", "Sciences", "Civilian", "Other"]
     for i in range(len(valid_divs)):
         if division == valid_divs[i]:
-            return True
+            return i
     
     print("Invalid TNG Division. Please try one below")
     print_list(valid_divs)
-    return False
+    return -1
 
 
 
@@ -280,5 +284,33 @@ def search_crew(names, ranks, divisions, ids):
     
     if found == False:
         print(f"No matching crew members for '{search_term}' ")
+
+
+def filter_by_division(names, ranks, divisions, ids):
+    
+    while True:
+        check_div = input("What division would you like to check").strip().title()
+        idx = valid_division(check_div)
+        if idx != -1:
+                print_by_division(idx, names, ranks, divisions, ids)
+                break
+        
+        
+            
+
+                
+
+def print_by_division(div, names, ranks, divisions, ids):
+    valid_divs = ["Command", "Operations", "Sciences", "Civilian", "Other"]
+    print(f"-----Members of {valid_divs[div]}-----")
+    found = False
+    for i in range(len(divisions)):
+        if valid_divs[div] in divisions[i]:
+            print(f"{ids[i]} | {names[i]} | {ranks[i]}")
+            found = True
+    if found == False:
+        print("No members found")
+
+
 
 main()
