@@ -1,34 +1,42 @@
 
+import time
+
 
 def main():
     print("BOOTING SYSTEM...")
     print("...")
     
 
-    init_database()
-    display_menu()
+    names, ranks, divisions, ids = init_database()
+    opt = int(display_menu())
+    if opt == 1:
+        add_member(names, ranks, divisions, ids)
+    
+        
 
 
 
 
 def init_database():
-    names = ["Spock" , "Data" , "Garak" , "EMH" , "Tuvok"]
-    ranks = ["First Officer" , "Operations Officer", "Medical Officer" , "Recurrent" , "Security"]
+    names = ["Picard" , "Riker" , "Data" , "Forge" , "Crusher"]
+    ranks = ["Captain" , "Commander", "Lieutenant Commander" , "Lieutenant Commander" , "Commander"]
     divisions = ["Science" , "Operations" , "Other" , "Science" , "Operations" ]
-    id = ["1001" , "1002" , "1003" , "1004" , "1005"]
+    ids = ["1001" , "1002" , "1003" , "1004" , "1005"]
 
-    return names, ranks, divisions, id
+    return names, ranks, divisions, ids, 
 
 
 def display_menu():
 
     full_name = input("Enter your full name: ").strip().title()
 
-    print("\n--- MENU ---")
+    
 
     print(f"Logging in: {full_name} ")
+    print("...")
     print(f"Student: {full_name} is now logged in")
     print("WELCOME TO FLEET COMMAND")
+    print("\n--- MENU ---")
     print("1. View Crew")
     print("2. Add Crew")
     print("3. Remove Crew")
@@ -40,6 +48,70 @@ def display_menu():
 
 
 
+def add_member(names, ranks, divisions, ids):
+    valid_ranks = ["Crewman", "Ensign" , "Jr Lieutenant", "Lieutenant", "Lieutenant Commander", "Commander", "Captain", "Rear Admiral", "Vice Admiral", "Admiral"]
+            
+    new_name = input("Name: ").strip().title()
+
+    while True:
+        new_rank = input("Rank: ").strip().title()
+
+        found = False
+        for i in range(len(valid_ranks)):
+            if new_rank == valid_ranks[i]:
+                found = True
+        
+        if found == True: 
+            break
+        else:
+            print("Rank cannot be found. Please use a valid TNG rank listed below")
+            print_list(valid_ranks)
+        
+    new_div = input("Division: ").strip().title()
+
+    while True:
+        new_id = input("ID: ").strip()
+        found = False
+
+        for i in range(len(ids)):
+            if new_id == ids[i]:
+                found = True 
+        
+        if found == True:
+            print("This id is already in use. Please Use another")
+        else:
+            break
+
+
+
+
+    names.append(new_name)
+    ranks.append(new_rank)
+    divisions.append(new_div)
+    ids.append(new_id)
+
+    print(f"Crew member:  {ids[-1]} | {names[-1]} | {ranks[-1]} | {divisions[-1]}  has been succesfully added")
+
+
+
+# prints list on a single line with no extra formatting 
+def print_list(list):
+
+ 
+    x  =  ""
+    for i in range(len(list)):
+        if i == 0:
+            x += list[i]
+        else:
+            x += " | " + list[i]
+    print(f"{x}")
+
+
+
+    
+            
+           
+   
 
 
 
