@@ -31,7 +31,8 @@ def main():
             remove_member(names, ranks, divisions, ids)
         elif opt == 4:
             update_rank(names,ranks, divisions, ids)
-       ## elif opt == 5:
+        elif opt == 5:
+            search_crew(names, ranks, divisions, ids)
             
 
        ## elif opt == 6:
@@ -75,7 +76,7 @@ def display_menu():
     print("2. Add Crew")
     print("3. Remove Crew")
     print("4. Update rank")
-    print("5. Find crew")
+    print("5. Search crew")
     print("6. Filter by division")
     print("7. Calculate payroll")
     print("8. Count officers")
@@ -268,6 +269,16 @@ def get_id(names, ranks, divisions, ids):
             display_roster(names, ranks, divisions, ids)
     
 
+def search_crew(names, ranks, divisions, ids):
 
+    search_term = input("Enter a search term: ").strip().lower()
+    found = False
+    for i in range(len(names)):
+        if search_term in names[i].lower():
+            print(f"Found: {ids[i]} | {names[i]} | {ranks[i]} | {divisions[i]} ")
+            found = True
+    
+    if found == False:
+        print(f"No matching crew members for '{search_term}' ")
 
 main()
