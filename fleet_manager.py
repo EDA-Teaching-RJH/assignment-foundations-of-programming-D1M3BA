@@ -39,9 +39,10 @@ def main():
             filter_by_division(names, ranks, divisions, ids)
 
         elif opt == "7":
-            calculate_payroll (ranks)
+            calculate_payroll(ranks)
 
-       ## elif opt == 8:
+        elif opt == 8:
+            count_officers(ranks)
         
 
         elif opt == 9:
@@ -342,7 +343,14 @@ def calculate_payroll (ranks):
 
 
 
+ def count_officers(ranks):
+        
+        count = 0
+        for i in range(len(ranks)):
+            if ranks[i] == "Captain" or ranks[i] == "Commander" or ranks[i] == "Rear Admiral"  or ranks[i] ==  "Vice admiral"  or ranks[i] ==   "Admiral":
+                count += 1
 
+        print(f"Total High ranking officers: {count}")
 
 
    
