@@ -1,57 +1,86 @@
-
 import time
 
 
 def main():
+    print("=" * 50)
     print("BOOTING SYSTEM...")
+    print("=" * 50)
     time.sleep(0.5)
     
-    
+    print("\n[SYSTEM] Initializing database...")
     names, ranks, divisions, ids = init_database()
-    print("Initilising databse")
-    time.sleep(0.5)
-    print("Sucessful")
+    time.sleep(0.3)
+    print("[SYSTEM] Database loaded successfully")
     time.sleep(0.5)
 
+    print("\n" + "-" * 50)
     full_name = input("Enter your full name: ").strip().title()
-    print(f"Logging in: {full_name} ")
+    print(f"[AUTH] Logging in: {full_name}...")
     time.sleep(0.5)
+    print(f"[AUTH] Welcome, {full_name}")
+    time.sleep(0.3)
+    print("-" * 50)
     
-    print(f"Student: {full_name} is now logged in")
-    time.sleep(0.5)
-    print("WELCOME TO FLEET COMMAND")
+    print("\n" + "=" * 50)
+    print("     WELCOME TO FLEET COMMAND")
+    print("=" * 50)
 
     while True:
-        opt = display_menu()
+        opt = display_menu(full_name)
+        
         if opt == "1":
+            print("\n[SYSTEM] Loading crew roster...")
+            time.sleep(0.3)
             display_roster(names, ranks, divisions, ids)
+            
         elif opt == "2":
+            print("\n[SYSTEM] Add crew member module activated")
+            time.sleep(0.3)
             add_member(names, ranks, divisions, ids)
+            
         elif opt == "3":
+            print("\n[SYSTEM] Remove crew member module activated")
+            time.sleep(0.3)
             remove_member(names, ranks, divisions, ids)
+            
         elif opt == "4":
-            update_rank(names,ranks, divisions, ids)
+            print("\n[SYSTEM] Rank update module activated")
+            time.sleep(0.3)
+            update_rank(names, ranks, divisions, ids)
+            
         elif opt == "5":
+            print("\n[SYSTEM] Searching crew database...")
+            time.sleep(0.3)
             search_crew(names, ranks, divisions, ids)
             
-
         elif opt == "6":
+            print("\n[SYSTEM] Filtering by division...")
+            time.sleep(0.3)
             filter_by_division(names, ranks, divisions, ids)
 
         elif opt == "7":
-            calculate_payroll(ranks)
-
-        elif opt == 8:
-            count_officers(ranks)
+            print("\n[SYSTEM] Calculating payroll...")
+            time.sleep(0.3)
+            total = calculate_payroll(ranks)
+            print(f"[FINANCE] Total monthly payroll: {total} Credits")
+            
+        elif opt == "8":
+            print("\n[SYSTEM] Analyzing officer count...")
+            time.sleep(0.3)
+            officer_count = count_officers(ranks)
+            print(f"[ANALYSIS] Total high-ranking officers: {officer_count}")
         
-
-        elif opt == 9:
-            print(f"Logging out User: {full_name}")
+        elif opt == "9":
+            print("\n" + "=" * 50)
+            print(f"[AUTH] Logging out user: {full_name}")
             time.sleep(0.5)
-            print("Shutting down")
-        
+            print("[SYSTEM] Shutting down...")
+            time.sleep(0.5)
+            print("=" * 50)
+            break
+            
         else:
-            print("Invalid result. Enter the number next to the associated action")
+            print("\n[ERROR] Invalid option. Enter the number next to the associated action")
 
             
     
@@ -61,23 +90,19 @@ def main():
 
 
 def init_database():
-    names = ["Picard" , "Riker" , "Data" , "Forge" , "Crusher"]
-    ranks = ["Captain" , "Commander", "Lieutenant Commander" , "Lieutenant Commander" , "Commander"]
-    divisions = ["Science" , "Operations" , "Other" , "Science" , "Operations" ]
-    ids = ["1001" , "1002" , "1003" , "1004" , "1005"]
+    names = ["Picard", "Riker", "Data", "Forge", "Crusher"]
+    ranks = ["Captain", "Commander", "Lieutenant Commander", "Lieutenant Commander", "Commander"]
+    divisions = ["Science", "Operations", "Other", "Science", "Operations"]
+    ids = ["1001", "1002", "1003", "1004", "1005"]
 
     return names, ranks, divisions, ids
 
 
-def display_menu():
-
-    
-
-    
-
-   
-    
-    print("\n--- MENU ---")
+def display_menu(full_name):
+    print("\n" + "-" * 50)
+    print(f"  Logged in as: {full_name}")
+    print("-" * 50)
+    print("--- MENU ---")
     print("1. View Crew")
     print("2. Add Crew")
     print("3. Remove Crew")
@@ -86,8 +111,8 @@ def display_menu():
     print("6. Filter by division")
     print("7. Calculate payroll")
     print("8. Count officers")
-
     print("9. Exit")
+    print("-" * 50)
     opt = input("Select option: ").strip()
     
     return opt
@@ -105,6 +130,7 @@ def add_member(names, ranks, divisions, ids):
         found = valid_rank(new_rank)
         if found == True: 
             break
+            
     while True:
         new_div = input("Division: ").strip().title()
         found = valid_division(new_div)
@@ -120,27 +146,24 @@ def add_member(names, ranks, divisions, ids):
                 found = True 
         
         if found == True:
-            print("This id is already in use. Please Use another")
+            print("[ERROR] This ID is already in use. Please use another")
         else:
             break
-
-
-
 
     names.append(new_name)
     ranks.append(new_rank)
     divisions.append(new_div)
     ids.append(new_id)
 
-    print(f"Crew member:  {ids[-1]} | {names[-1]} | {ranks[-1]} | {divisions[-1]}  has been succesfully added")
+    print(f"\n[SUCCESS] Crew member added:")
+    time.sleep(0.3)
+    print(f"  ID: {ids[-1]} | Name: {names[-1]} | Rank: {ranks[-1]} | Division: {divisions[-1]}")
 
 
 
 
 def print_list(list):
-
- 
-    x  =  ""
+    x = ""
     for i in range(len(list)):
         if i == 0:
             x += list[i]
@@ -153,11 +176,10 @@ def print_list(list):
     
             
            
-def display_roster (names, ranks, divisions, ids):
-
-
+def display_roster(names, ranks, divisions, ids):
+    print("\n" + "=" * 90)
     print("ID                    |Name                   |Rank                   |Division             ")
-    print("--------------------------------------------------------------------------------------------")
+    print("=" * 90)
 
     for i in range(len(names)):
         name = column_align(names[i])
@@ -166,46 +188,43 @@ def display_roster (names, ranks, divisions, ids):
         id = column_align(ids[i])
 
         print(f"{id}| {name}| {rank}| {division}")
+    
+    print("=" * 90)
 
 
 
 
 
 def remove_member(names, ranks, divisions, ids):
-    
-   
-
-    print("What crew member would you like to remove")
+    print("What crew member would you like to remove?")
     idx = get_id(names, ranks, divisions, ids)
    
-        
-    print(f"Removing {ids[idx]} | {names[idx]} | {ranks[idx]} | {divisions[idx]}")
+    print(f"\n[CONFIRM] Removing: {ids[idx]} | {names[idx]} | {ranks[idx]} | {divisions[idx]}")
+    time.sleep(0.3)
         
     ids.pop(idx)
     names.pop(idx)
     divisions.pop(idx)
     ranks.pop(idx)
-    print("Crew Member has been removed")
+    
+    print("[SUCCESS] Crew member has been removed")
     
 
 
-def update_rank(names, ranks, divisions,ids): 
-    
-    print("Whos rank do you wish to change")
+def update_rank(names, ranks, divisions, ids): 
+    print("Whose rank do you wish to change?")
     idx = get_id(names, ranks, divisions, ids)
 
-    print(f"{names[idx]} is currently a {ranks[idx]}")
+    print(f"\n[INFO] {names[idx]} is currently a {ranks[idx]}")
 
     while True: 
-        new_rank = input(f"Enter {names[idx]} new rank:  ")
-
-        
+        new_rank = input(f"Enter {names[idx]}'s new rank: ").strip().title()
         
         if valid_rank(new_rank) == True:
             ranks[idx] = new_rank
-            print(f"Succesful.")
-            time.sleep(0.5)
-            print(f"{names[idx]} is now a {ranks[idx]} ")
+            print(f"\n[SUCCESS] Rank updated")
+            time.sleep(0.3)
+            print(f"[INFO] {names[idx]} is now a {ranks[idx]}")
             break
         
     
@@ -234,12 +253,12 @@ def column_align(word):
 
 
 def valid_rank(rank):
-    valid_ranks = ["Crewman", "Ensign" , "Jr Lieutenant", "Lieutenant", "Lieutenant Commander", "Commander", "Captain", "Rear Admiral", "Vice Admiral", "Admiral"]
+    valid_ranks = ["Crewman", "Ensign", "Jr Lieutenant", "Lieutenant", "Lieutenant Commander", "Commander", "Captain", "Rear Admiral", "Vice Admiral", "Admiral"]
     for i in range(len(valid_ranks)):
-            if rank == valid_ranks[i]:
-                return True
+        if rank == valid_ranks[i]:
+            return True
             
-    print("Invalid TNG Rank. Please try one below")
+    print("[ERROR] Invalid TNG Rank. Please try one below:")
     print_list(valid_ranks)
     return False
 
@@ -253,7 +272,7 @@ def valid_division(division):
         if division == valid_divs[i]:
             return i
     
-    print("Invalid TNG Division. Please try one below")
+    print("[ERROR] Invalid TNG Division. Please try one below:")
     print_list(valid_divs)
     return -1
 
@@ -262,40 +281,41 @@ def valid_division(division):
 
 def get_id(names, ranks, divisions, ids):
     while True:
-        id_to_find = input("Enter Id: ").strip()
+        id_to_find = input("Enter ID: ").strip()
         found = False
         for i in range(len(ids)):
             if ids[i] == id_to_find:
                 return i
-        print(f"Error: ID '{id_to_find}' not found.")
+        print(f"[ERROR] ID '{id_to_find}' not found.")
 
-
-        choice = input("Type list to view roster or Enter to try again: ")
+        choice = input("Type 'list' to view roster or press Enter to try again: ").strip().lower()
         if choice == 'list':
             display_roster(names, ranks, divisions, ids)
     
 
 def search_crew(names, ranks, divisions, ids):
-
     search_term = input("Enter a search term: ").strip().lower()
     found = False
+    
+    print(f"\n[SEARCH] Searching for '{search_term}'...")
+    time.sleep(0.3)
+    
     for i in range(len(names)):
         if search_term in names[i].lower():
-            print(f"Found: {ids[i]} | {names[i]} | {ranks[i]} | {divisions[i]} ")
+            print(f"[FOUND] {ids[i]} | {names[i]} | {ranks[i]} | {divisions[i]}")
             found = True
     
     if found == False:
-        print(f"No matching crew members for '{search_term}' ")
+        print(f"[SEARCH] No matching crew members for '{search_term}'")
 
 
 def filter_by_division(names, ranks, divisions, ids):
-    
     while True:
-        check_div = input("What division would you like to check").strip().title()
+        check_div = input("What division would you like to check? ").strip().title()
         idx = valid_division(check_div)
         if idx != -1:
-                print_by_division(idx, names, ranks, divisions, ids)
-                break
+            print_by_division(idx, names, ranks, divisions, ids)
+            break
         
         
             
@@ -304,18 +324,24 @@ def filter_by_division(names, ranks, divisions, ids):
 
 def print_by_division(div, names, ranks, divisions, ids):
     valid_divs = ["Command", "Operations", "Science", "Civilian", "Other"]
-    print(f"-----Members of {valid_divs[div]}-----")
+    print("\n" + "=" * 50)
+    print(f"  Members of {valid_divs[div]} Division")
+    print("=" * 50)
+    
     found = False
     for i in range(len(divisions)):
         if valid_divs[div] in divisions[i]:
             print(f"{ids[i]} | {names[i]} | {ranks[i]}")
             found = True
+            
     if found == False:
-        print("No members found")
+        print("[INFO] No members found")
+    
+    print("=" * 50)
 
 
 
-def calculate_payroll (ranks):
+def calculate_payroll(ranks):
     total_budget = 0
     for i in range(len(ranks)):
         rank = ranks[i]
@@ -338,19 +364,18 @@ def calculate_payroll (ranks):
         elif rank == "Civilian":
             continue
         else:
-            total_budget += 200 
-    print(f"Total monthly payroll: {total_budget} Credits")
+            total_budget += 200
+    
+    return total_budget
 
 
+def count_officers(ranks):
+    count = 0
+    for i in range(len(ranks)):
+        if ranks[i] == "Captain" or ranks[i] == "Commander" or ranks[i] == "Rear Admiral" or ranks[i] == "Vice Admiral" or ranks[i] == "Admiral":
+            count += 1
 
- def count_officers(ranks):
-        
-        count = 0
-        for i in range(len(ranks)):
-            if ranks[i] == "Captain" or ranks[i] == "Commander" or ranks[i] == "Rear Admiral"  or ranks[i] ==  "Vice admiral"  or ranks[i] ==   "Admiral":
-                count += 1
-
-        print(f"Total High ranking officers: {count}")
+    return count
 
 
    
